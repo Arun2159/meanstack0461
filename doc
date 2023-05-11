@@ -1,0 +1,16 @@
+
+create project for E-commerce:-
+
+1. create category and update category.
+2. create sub category and update sub category.
+Note : manage only one collection in mongodb.
+3. get listing with count count total sub category.
+4. get listing sub category by category id.
+5. create product and update product.
+6. get listing product and filter product with categoty , sub category , product name and price.
+7. add cart .
+8. remove cart.
+9. create order and cancel order and handling add cart logic.
+10. dashboard count data.
+11. track order.
+12. store profile setting details.
