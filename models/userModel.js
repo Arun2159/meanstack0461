@@ -17,7 +17,7 @@ const User = mongoose.model('User',userSchema);
 module.exports=User;
 
 var helperMethod = {};
-//Model functions
+//Model functions create by arun
 helperMethod.insert = insert;
 helperMethod.getUserByEmail = getUserByEmail;
 helperMethod.getuserDetails = getuserDetails;
