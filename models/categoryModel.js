@@ -21,6 +21,8 @@ module.exports=Category;
 var helperMethod = {};
 //Model functions create by arun
 helperMethod.insert = insert;
+helperMethod.update = update;
+helperMethod.getcategorylist = getcategorylist;
 module.exports = helperMethod;
 
 function insert(query) {
@@ -32,4 +34,22 @@ function insert(query) {
     });
     return deferred.promise;
 }
+function update(categorytId,data) {
+    var deferred = Q.defer();
+    Category.findByIdAndUpdate(categorytId,data).then(function (_data) {
+        deferred.resolve(_data);
+    }).catch(function (_err) {
+        deferred.reject(_err);
+    });
+    return deferred.promise;
+}
 
+function getcategorylist(query) {
+    var deferred = Q.defer();
+    Category.find().sort(query).then(function (_data) {
+        deferred.resolve(_data);
+    }).catch(function (err) {
+        deferred.reject(err);
+    });
+    return deferred.promise;
+}
