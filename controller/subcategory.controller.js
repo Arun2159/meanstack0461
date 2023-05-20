@@ -8,38 +8,38 @@ const Category = require('../models/categoryModel');
 const app = express();
 const bodyParser = require('body-parser');
 // REQUEST VALIDATION POST-GET-PUT-DELETE
-router.post('/create-category', createcategory);
-router.get('/get-categorylist', categorylist);
-router.post('/get-updatecategory', updatecategory);
-async function createcategory(req, res) {
+router.post('/create-subcategory', createsubcategory);
+router.get('/get-subcategorylist', subcategorylist);
+router.post('/get-subupdatecategory', updatesubcategory);
+async function createsubcategory(req, res) {
     try{
-        const category= await Category.insert(req.body);
-        res.status(200).json({ 'responseCode': 200, 'message': 'Add category successfully', 'data': category}).end();
+        const subcategory= await Category.insert(req.body);
+        res.status(200).json({ 'responseCode': 200, 'message': 'Add Sub category successfully', 'data': subcategory}).end();
        }catch(error){
         console.log(error.message);
         res.status(500).json({message:error.message})
        }
 }
-async function updatecategory(req, res) {
+async function updatesubcategory(req, res) {
     try{
         var categorytId=req.body._id;
-        const category= await Category.update(categorytId,req.body);
-        if(!category){
-            return res.status(404).json({message:'can not find any category'})
+        const subcategory= await Category.update(categorytId,req.body);
+        if(!subcategory){
+            return res.status(404).json({message:'can not find any Sub category'})
         }
-        res.status(200).json({ 'responseCode': 200, 'message': 'update category successfully', 'data': category}).end();
+        res.status(200).json({ 'responseCode': 200, 'message': 'update Sub category successfully', 'data': subcategory}).end();
        }catch(error){
         console.log(error.message);
         res.status(500).json({message:error.message})
        }
 }
-async function categorylist(req, res) {
+async function subcategorylist(req, res) {
     try{
-        var query = [{ "$match":{"parentId":""}}];
+        var query = [{ "$match":{"parentId":{"$ne": ""}}}];
         query.push({ $sort: { _id: -1 } });
        // console.log(query);
         const category= await Category.getcategorylist(query);
-        res.status(200).json({ 'responseCode': 200, 'message': 'category list', 'data': category}).end();
+        res.status(200).json({ 'responseCode': 200, 'message': 'Sub category list', 'data': category}).end();
        }catch(error){
         console.log(error.message);
         res.status(500).json({message:error.message})

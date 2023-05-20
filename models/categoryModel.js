@@ -46,7 +46,7 @@ function update(categorytId,data) {
 
 function getcategorylist(query) {
     var deferred = Q.defer();
-    Category.find().sort(query).then(function (_data) {
+    Category.aggregate(query).then(function (_data) {
         deferred.resolve(_data);
     }).catch(function (err) {
         deferred.reject(err);
