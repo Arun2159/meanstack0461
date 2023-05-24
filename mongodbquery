@@ -1,0 +1,38 @@
+
+//categories and sub categories query for listing and count:
+
+
+db.getCollection('categories').aggregate([
+    {
+      $match: {
+        parentId: ""
+      }
+    },
+    {
+      $lookup: {
+        from: "categories",
+        let: { parentId: {$toString:"$_id" }},
+        pipeline: [
+          {
+            $match: {
+              $expr: { $eq: ["$parentId", "$$parentId"] }
+            }
+          },
+          {
+            $count: "totalsubcategory"
+          }
+        ],
+        as: "subcategoryCount"
+      }
+    },
+    {
+      $project: {
+        id: "$_id",
+        name: "$name",
+        parentId: "$parentId",
+        totalsubcategory: {
+          $ifNull: [{ $arrayElemAt: ["$subcategoryCount.totalsubcategory", 0] }, 0]
+        }
+      }
+    }
+  ])

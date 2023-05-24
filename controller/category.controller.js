@@ -35,7 +35,41 @@ async function updatecategory(req, res) {
 }
 async function categorylist(req, res) {
     try{
-        var query = [{ "$match":{"parentId":""}}];
+       // var query = [{ "$match":{"parentId":""}}];
+        var query =[
+            {
+              $match: {
+                parentId: ""
+              }
+            },
+            {
+              $lookup: {
+                from: "categories",
+                let: { parentId: {$toString:"$_id" }},
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: { $eq: ["$parentId", "$$parentId"] }
+                    }
+                  },
+                  {
+                    $count: "totalsubcategory"
+                  }
+                ],
+                as: "subcategoryCount"
+              }
+            },
+            {
+              $project: {
+                //id: "$_id",
+                name: "$name",
+                parentId: "$parentId",
+                totalsubcategory: {
+                  $ifNull: [{ $arrayElemAt: ["$subcategoryCount.totalsubcategory", 0] }, 0]
+                }
+              }
+            }
+          ];
         query.push({ $sort: { _id: -1 } });
        // console.log(query);
         const category= await Category.getcategorylist(query);
