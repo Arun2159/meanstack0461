@@ -34,7 +34,7 @@ async function updatecategory(req, res) {
        }
 }
 async function categorylist(req, res) {
-    try{
+    try{ 
        // var query = [{ "$match":{"parentId":""}}];
         var query =[
             {
