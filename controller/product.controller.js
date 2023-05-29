@@ -13,7 +13,6 @@ router.get('/get-product-list', productlist);
 router.get('/get-product-details', productdetails);
 router.post('/get-product-delete', productdelete);
 router.post('/get-product-update', updateproduct);
-
 async function product(req, res) {
     try{
         const product= await Product.create(req.body);
