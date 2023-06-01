@@ -5,7 +5,7 @@
 	},
     "JWT_SECRET" :"goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu",
     "EXPIRESTIME": "600s",
-    "PORT": 6001,
-    "publicURL": "http://localhost:6001/"
+    "PORT": 5001,
+    "publicURL": "http://localhost:5001/"
 
 }

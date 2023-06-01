@@ -20,9 +20,11 @@ app.use(express.json())
         })
     }
 }*/
-
 router.use('/user/', require('../controller/user.controller.js'));
 router.use('/product/',auth, require('../controller/product.controller.js'));
 router.use('/category/',auth, require('../controller/category.controller.js'));
 router.use('/subcategory/',auth, require('../controller/subcategory.controller.js'));
+router.use('/carts/',auth, require('../controller/carts.controller.js'));
+
+
 module.exports = router;
