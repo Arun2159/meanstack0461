@@ -32,9 +32,10 @@ async function updatecategory(req, res) {
         console.log(error.message);
         res.status(500).json({message:error.message})
        }
+       
 }
 async function categorylist(req, res) {
-    try{
+    try{ 
        // var query = [{ "$match":{"parentId":""}}];
         var query =[
             {
